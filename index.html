@@ -655,95 +655,60 @@
 }
 
 /* ===== MOBILE HEADER FIXES ===== */
-
 @media (max-width: 768px) {
   
-  /* Make header stack vertically or use hamburger menu */
+  /* Make header more compact */
   .nav-inner {
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 12px 16px;
+    padding: 12px 0;
+    gap: 8px;
   }
 
-  /* Logo section - make it smaller and adjust text */
+  /* Logo section - smaller and compact */
   .brand {
-    flex: 1;
-    min-width: 0; /* Allows text to shrink */
+    flex: 0 1 auto;
+    max-width: 200px;
   }
 
   .brand img {
-    width: 40px; /* Smaller logo on mobile */
-    height: 40px;
+    width: 35px;
+    height: 35px;
   }
 
-  .brand > div {
-    font-size: 14px; /* Smaller brand name */
+  .brand > div > div:first-child {
+    font-size: 13px;
+    line-height: 1.2;
   }
 
   .brand > div > div:last-child {
-    font-size: 10px !important; /* Smaller tagline */
+    font-size: 9px !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  /* Hide navigation links by default on mobile */
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: rgba(21, 29, 51, 0.98);
-    flex-direction: column;
-    padding: 20px;
-    gap: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    z-index: 1000;
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-  .nav-links a {
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-size: 16px;
-  }
-
-  /* CTA buttons on mobile */
-  .nav-cta {
-    display: flex;
-    gap: 8px;
-  }
-
-  .nav-cta .btn {
-    padding: 8px 12px;
-    font-size: 13px;
-    white-space: nowrap;
-  }
-
   /* Hamburger menu button */
   .hamburger {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
     cursor: pointer;
     padding: 8px;
-    margin-left: auto;
+    background: none;
+    border: none;
+    order: 2;
   }
 
   .hamburger span {
-    width: 25px;
-    height: 3px;
+    width: 22px;
+    height: 2.5px;
     background: rgba(242, 215, 122, 0.95);
     border-radius: 2px;
     transition: 0.3s;
+    display: block;
   }
 
   .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
+    transform: rotate(45deg) translate(6px, 6px);
   }
 
   .hamburger.active span:nth-child(2) {
@@ -751,62 +716,103 @@
   }
 
   .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(6px, -6px);
   }
-}
 
-/* Tablet size adjustments */
-@media (max-width: 1024px) and (min-width: 769px) {
-  .nav-inner {
-    gap: 16px;
+  /* Hide desktop navigation */
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: rgba(7, 26, 43, 0.98);
+    backdrop-filter: blur(14px);
+    flex-direction: column;
+    padding: 20px;
+    gap: 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .nav-links.active {
+    display: flex !important;
   }
 
   .nav-links a {
-    font-size: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .nav-links a:last-child {
+    border-bottom: none;
+  }
+
+  /* CTA button on mobile */
+  .nav-cta {
+    order: 3;
   }
 
   .nav-cta .btn {
     padding: 8px 14px;
-    font-size: 13px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 400px) {
+  .brand > div > div:last-child {
+    display: none; /* Hide tagline on very small screens */
+  }
+  
+  .nav-cta .btn {
+    padding: 6px 10px;
+    font-size: 11px;
   }
 }
     </style>
   </head>
 
   <body>
+
+
     <!-- NAV -->
-    <header class="nav">
-      <div class="container nav-inner">
-        <a class="brand" href="#top" aria-label="Thee Zulu Yogi">
-          <img src="logo.jpeg" alt="Thee Zulu Yogi Logo" />
-          <div>
-            <div style="line-height: 1">Thee Zulu Yogi</div>
-            <div style="font-size: 12px; color: rgba(255,255,255,.65); margin-top: 2px;">
-              Wellness • Corporate Sessions • Healing
-            </div>
-          </div>
-        </a>
-
-        <!-- Hamburger menu button (mobile only) -->
-         <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <nav class="nav-links" aria-label="Page navigation">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <!--<a href="#events">Events</a>-->
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <div class="nav-cta">
-          <!--<a class="btn" href="#events">View Flyers</a>-->
-          <a class="btn btn-primary" href="#contact">Book a Session</a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="Thee Zulu Yogi">
+      <img src="logo.jpeg" alt="Thee Zulu Yogi Logo" />
+      <div>
+        <div style="line-height: 1">Thee Zulu Yogi</div>
+        <div style="font-size: 12px; color: rgba(255,255,255,.65); margin-top: 2px;">
+          Wellness • Corporate • Healing
         </div>
       </div>
-    </header>
+    </a>
+
+    <!-- Hamburger menu button (mobile only) -->
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" aria-label="Page navigation">
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#services" onclick="closeMenu()">Services</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="#contact">Book a Session</a>
+    </div>
+  </div>
+</header>
+
+
 
     <!-- HERO -->
     <main id="top" class="hero">
@@ -1130,48 +1136,64 @@
     </div>
 
     <script>
-      // Footer year
-      document.getElementById("year").textContent = new Date().getFullYear();
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-      // Flyer modal
-      const modal = document.getElementById("modal");
-      const modalTitle = document.getElementById("modalTitle");
-      const modalPreview = document.getElementById("modalPreview");
-      const closeBtn = document.getElementById("closeModal");
+  // Hamburger menu toggle
+  function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.querySelector('.hamburger');
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  }
 
-      function openFlyerModal(titleText) {
-        modalTitle.textContent = titleText;
-        modalPreview.textContent =
-          "Replace this placeholder with the real flyer image later.";
-        modal.classList.add("open");
-      }
+  function closeMenu() {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.querySelector('.hamburger');
+    navLinks.classList.remove('active');
+    hamburger.classList.remove('active');
+  }
 
-      function closeFlyerModal() {
-        modal.classList.remove("open");
-      }
+  // Flyer modal
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalPreview = document.getElementById("modalPreview");
+  const closeBtn = document.getElementById("closeModal");
 
-      document.querySelectorAll(".flyer").forEach((el) => {
-        el.addEventListener("click", () => {
-          const name = el.getAttribute("data-flyer") || "Flyer Preview";
-          openFlyerModal(name);
-        });
-      });
+  function openFlyerModal(titleText) {
+    modalTitle.textContent = titleText;
+    modalPreview.textContent =
+      "Replace this placeholder with the real flyer image later.";
+    modal.classList.add("open");
+  }
 
-      closeBtn.addEventListener("click", closeFlyerModal);
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeFlyerModal();
-      });
+  function closeFlyerModal() {
+    modal.classList.remove("open");
+  }
 
-      window.closeFlyerModal = closeFlyerModal;
+  document.querySelectorAll(".flyer").forEach((el) => {
+    el.addEventListener("click", () => {
+      const name = el.getAttribute("data-flyer") || "Flyer Preview";
+      openFlyerModal(name);
+    });
+  });
 
-      const slides = document.querySelectorAll(".slide");
-      let index = 0;
-      
-      setInterval(() => {
-        slides[index].classList.remove("active");
-        index = (index + 1) % slides.length;
-        slides[index].classList.add("active");
-      }, 3500);
-    </script>
+  closeBtn.addEventListener("click", closeFlyerModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeFlyerModal();
+  });
+
+  window.closeFlyerModal = closeFlyerModal;
+
+  // Hero slider
+  const slides = document.querySelectorAll(".slide");
+  let index = 0;
+  
+  setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+  }, 3500);
+</script>
   </body>
 </html>
