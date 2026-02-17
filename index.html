@@ -619,6 +619,36 @@
           grid-template-columns: 1fr;
         }
       }
+
+      /* Mobile fix for contact section */
+@media (max-width: 768px) {
+
+  /* Stack the two cards vertically */
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack Name + Phone inputs vertically */
+  .row {
+    flex-direction: column;
+  }
+
+  .row input {
+    width: 100%;
+  }
+
+  /* Prevent cards from overflowing screen */
+  .card {
+    padding: 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  /* Make the Quick Details buttons wrap nicely */
+  .card > div[style*="display: flex"] {
+    flex-direction: column;
+  }
+}
     </style>
   </head>
 
