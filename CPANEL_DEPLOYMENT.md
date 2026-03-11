@@ -14,7 +14,35 @@ Upload ALL files and folders to your cPanel hosting:
 - `.htaccess` (server configuration)
 - `robots.txt` (SEO configuration)
 
-## Deployment Steps
+## Alternative: GitHub Pages Deployment (2025 Update)
+
+GitHub Pages now offers enhanced static site hosting with better performance and security:
+
+### Enable GitHub Pages
+1. Go to your repository on GitHub
+2. Navigate to **Settings** → **Pages**
+3. Under "Source", select **GitHub Actions**
+4. The included workflow (`.github/workflows/deploy.yml`) will automatically deploy your site
+5. Your site will be available at: `https://princengwane.github.io/Thee-Zulu-Yogi/`
+
+### Benefits of GitHub Pages (2025)
+- **Free hosting** with custom domain support
+- **Automatic SSL** certificates
+- **CDN distribution** for faster loading
+- **Automatic deployments** on every push to main branch
+- **Security scanning** with Dependabot integration
+
+### Custom Domain Setup (Optional)
+1. In repository **Settings** → **Pages**
+2. Add your custom domain (e.g., `theezuluyogi.com`)
+3. Enable "Enforce HTTPS"
+4. Update your domain's DNS records:
+   - Add CNAME record pointing to `princengwane.github.io`
+   - Or add A records pointing to GitHub's IP addresses
+
+---
+
+## cPanel Deployment (Traditional Hosting)
 
 ### Method 1: File Manager (Recommended for beginners)
 1. Log into your cPanel account
@@ -42,7 +70,7 @@ Upload ALL files and folders to your cPanel hosting:
 
 ## Post-Deployment Configuration
 
-### 1. Enable HTTPS (SSL)
+### 2. Enable HTTPS (SSL) - Critical for 2025
 1. In cPanel, go to **SSL/TLS Status**
 2. Install free Let's Encrypt SSL certificate
 3. After SSL is active, uncomment these lines in `.htaccess`:
@@ -51,8 +79,12 @@ Upload ALL files and folders to your cPanel hosting:
    RewriteCond %{HTTPS} off
    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
    ```
+4. **NEW 2025**: Enable HSTS by uncommenting this line in `.htaccess`:
+   ```apache
+   Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+   ```
 
-### 2. Verify File Permissions
+### 3. Verify File Permissions
 - Files: 644
 - Folders: 755
 - `.htaccess`: 644
@@ -114,6 +146,26 @@ Consider compressing images in the `pics/` folder for faster loading:
 1. Use cPanel **Backup Wizard** to create regular backups
 2. Download backups to local storage
 3. Consider automated daily backups if available in your hosting plan
+
+## Security & Automation (2025 Updates)
+
+### Dependabot Integration
+- Automatically monitors GitHub Actions for security updates
+- Creates pull requests for vulnerable dependencies
+- Configured in `.github/dependabot.yml`
+
+### GitHub Actions Security
+- Uses pinned action versions for security
+- Minimal permissions with `id-token: write` for OIDC
+- Concurrent deployment protection
+
+### Repository Security Recommendations
+1. Enable **branch protection** rules for main branch
+2. Require **pull request reviews** before merging
+3. Enable **security alerts** in repository settings
+4. Use **signed commits** for additional security
+
+---
 
 ## Support
 - Hosting Support: Contact your cPanel hosting provider
